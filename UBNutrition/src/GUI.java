@@ -2,52 +2,67 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 
+public class GUI {
 
-public class GUI implements ActionListener {
+    GameManager gm;
+    JFrame frame;
+    JTextArea messageText;
+    JPanel bgPanel[]= new JPanel[10];
+    JLabel bgLabel[] = new JLabel[10];
 
-
-    int count = 0;
-
-    private JPanel panel;
-
-    private JFrame frame;
-    private JLabel label;
-    private JTextField textField;
-    private JButton button1;
-    private JButton button2;
-
-    public GUI(){
-
-        frame = new JFrame();
-        panel = new JPanel();
-        label = new JLabel("Number of clicks: 0");
-        textField = new JTextField();
-        button1 = new JButton("Enter");
-        button1.addActionListener(this);
-
-        panel.setBorder(BorderFactory.createEmptyBorder(100,100,100, 100));
-        panel.setLayout(new GridLayout(0,1));
-        //panel.add(label);
-        //panel.add(textField);
-        panel.add(button1);
-
-        frame.add(panel,BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Nutrition GUI");
-        frame.pack();
+    public GUI(GameManager gm) {
+        this.gm = gm;
+        createMainField();
+        createBackground();
         frame.setVisible(true);
+
+
+    }
+
+    public void createMainField() {
+        frame = new JFrame();
+        frame.setSize(800,600);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setBackground(Color.black);
+        frame.setLayout(null);
+
+        messageText = new JTextArea("e");
+        messageText.setBounds(50,400,700,150);
+        messageText.setBackground(Color.black);
+        messageText.setForeground(Color.white);
+        messageText.setEditable(false);
+        messageText.setLineWrap(true);
+        messageText.setWrapStyleWord(true);
+        messageText.setFont(new Font("Book Antiqua",Font.PLAIN,26));
+        frame.add(messageText);
     }
 
 
-    public static void main(String[] args) {
-        new GUI();
+    public void createBackground(){
+        bgPanel[1]= new JPanel();
+        bgPanel[1].setBounds(50,50,700,350);
+        bgPanel[1].setBackground(Color.blue);
+        bgPanel[1].setLayout(null);
+        frame.add(bgPanel[1]);
+
+        bgLabel[1] = new JLabel();
+        bgLabel[1].setBounds(0,0,700,350);
+
+
+
+
+        ImageIcon bgIcon = new ImageIcon(getClass().getResource("/images/fantasy-7464309_1280.png"));
+        bgLabel[1].setIcon(bgIcon);
+
+        bgLabel[1].add(bgLabel[1]);
+
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        count++;
-        label.setText("Number of clicks: " +count);
-    }
+
+
+
+
 }
